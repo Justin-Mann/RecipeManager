@@ -13,14 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Controllers\RecipeController.cs~RF15f03ddf.TMP" />
-    <None Remove="DeveloperAssets\RecipeDbCreate.sql" />
+    <Content Remove="wwwroot\docs\RecipeDbCreate.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="DeveloperAssets\RecipeDbCreate.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Remove="Controllers\RecipeController.cs~RF15f03ddf.TMP" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DeveloperAssets\RecipeDbCreate.sql" />
+    <Folder Include="wwwroot\docs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DeveloperResources\RecipeDbCreate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
