@@ -17,10 +17,10 @@ namespace RecipeManager {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             //services.AddTransient(typeof(IBaseRepository<>), typeof(Repository<>;));
-            services.AddScoped<IRecipeRepository, RecipeRepository>();
-            services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
-            services.AddScoped<IRecipeStepRepository, RecipeStepRepository>();
-            services.AddScoped<IRecipeService, RecipeService>();
+            services.AddTransient<IRecipeRepository, RecipeRepository>();
+            services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
+            services.AddTransient<IRecipeStepRepository, RecipeStepRepository>();
+            services.AddTransient<IRecipeService, RecipeService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
