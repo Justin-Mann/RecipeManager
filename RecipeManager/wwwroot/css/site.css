@@ -1,0 +1,138 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+.navbar {
+    z-index: 200;
+}
+
+.addStepTrigger, .addIngredientTrigger {
+    font-weight: 700;
+    color: #246b34;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    text-align: center;
+}
+    .addStepTrigger:hover, .addIngredientTrigger:hover {
+        color: #00ad27;
+    }
+
+a .navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.one-liner {
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.h3-recipe-input {
+    font-size: 1.75rem;
+    width: auto;
+}
+
+.recipe-input {
+    display: inline;
+    border: 0px;
+    background-color: rgb(0 123 255 / 4%);
+}
+
+.sm-recipe-textarea {
+    margin-left: 4px;
+    border-left: 1px lightblue solid;
+    padding-left: 2px;
+    margin-bottom: 6px;
+}
+
+.stepContainer, .ingredientContainer {
+    position: relative;
+    z-index: 1;
+}
+
+    .stepContainer .deleteStepButton,
+    .ingredientContainer .deleteIngredientButton {
+        display: none;
+        z-index: 2;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-weight: 700;
+        color: white;
+        background-color: red;
+        border: 2px black solid;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .stepContainer:hover .deleteStepButton,
+    .ingredientContainer:hover .deleteIngredientButton {
+        display: inline;
+    }
+
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}

@@ -1,0 +1,46 @@
+﻿@model RecipeManager.Models.RecipeEntity
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col col-sm-12">
+                    <h3>@Model.Name</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-sm-10 mx-sm-auto">
+                    @Model.Description
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-sm-6">
+                    <h5>Steps</h5>
+                    <div>
+                        @foreach (var step in @Model.Steps)
+                        {
+                            <span class="font-weight-bolder">@step.Name</span> 
+                            @if(@step.Duration.HasValue){<span>(@step.Duration @step.DurationUnit)</span>}<br />
+                            <div class="small sm-recipe-textarea">@step.Detail</div>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <div class="col col-sm-6">
+                    <h5>Ingredients</h5>
+                    <div>
+                        @foreach (var ingredient in @Model.Ingredients)
+                        {
+                            <span class="font-weight-bolder small">@ingredient.Name</span> 
+                            @if (@ingredient.Units.HasValue) {<span>(@ingredient.Units @ingredient.UnitOfMeasure)</span>}<br />
+                            <div class="small sm-recipe-textarea">@ingredient.Description</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

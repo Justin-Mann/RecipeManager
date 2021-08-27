@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>A submission for a job application to work at Scentsy in Southern Idaho.</p>
+    <div class="card">
+        <div class="card-body">
+            <p>
+                This is where I would do some branding and highlight favorite recipes based on most viewed or highest ratings; perhaps a search utility here as well. However these are all features I am not going to write into
+                this app as they would just be excessive. Other features I would have built or only partially built or left out entirely include...
+            </p>
+            <ul class="text-left">
+                <li title="Started with it and mocked some stuff in for data structure, but did not build out any User Service.. The app runs in a logged in state and uses the same user account.">User service, User repository &amp; User Profile namagement, Creation, password updated, etc.</li>
+                <li title="Did not start or attempt any of this.">Export/Print functionality.</li>
+                <li title="Did not start or attempt any of this.">Ability to Favorite and view instance tracking.</li>
+                <li title="Did not start or attempt any of this.">Search functionality... full text matching to crawl entire recipe text, something like elastic or a 3rd party service lime Cognative.</li>
+                <li title="Did not start or attempt any of this.">Sky is the limit, some sort of sharing, could integrate sharing features across social platforms, image sharing platforms, etc..</li>
+                <li title="Did not start or attempt any of this.">Extend the login to work with social providers.</li>
+                <li title="Did not start or attempt any of this.">Used simple html5 validation as I did not want to define proper request/response models, so as a result I just made the data repositories tollerant of expected data and did not really use model decorators to handle validation as I normally would in tandom with client side validation.</li>
+                <li title="Did not start or attempt any of this.">Coding is pretty lose honestly.. I did not really implement logging and was not very concerned with building out seperate razor components and multiple controllers.. that side of the project structure could be more granular.</li>
+                <li title="Did not start or attempt any of this.">I would normally write several mock data items and use them for unit test scenarios, but not going to go thru all that for this project.. no test runner project, but it is prepped for unit testing by injecting mock repositories.</li>
+            </ul>
+        </div>
+    </div><br />
+    <div class="card">
+        <div class="card-header">
+            <h3>Usage</h3>
+        </div>
+        <div class="card-body">
+            <p>
+                You don't need to log in as that feature is not built out.. no service or anything to support it so the application just acts as if you are logged in already.
+                Even without the ability to log in you can explore the main application features... creating, editing, switching the state of and removing recipe records using the tools on the header above.
+            </p>
+        </div>
+    </div><br />
+    <div class="card">
+        <div class="card-header">
+            <h3>Setup</h3>
+        </div>
+        <div class="card-body">
+            <p>
+                In order for this application to work beyond this page a database needs to be installed manually using the script located <a href="" target="_blank">here</a>.  
+                This script will create the database and all necessary tables, as well as populate one user record fot the application to use for everything.
+            </p>
+        </div>
+    </div>
+</div>

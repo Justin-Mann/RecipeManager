@@ -1,0 +1,156 @@
+﻿@model RecipeManager.Models.RecipeEntity
+<div class="text-center">
+    <h1 class="display-4">Recipe Editor</h1>
+    <hr />
+</div>
+<div class="container">
+    <form asp-action="UpdateRecipe">
+        <div class="text-danger recipeValidationErrors"><!--TODO--></div>
+        <input name="Id" hidden value="@Model.Id" />
+        <input name="IsPublic" hidden value="@Model.IsPublic" />
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <input name="Name" value="@Model.Name" class="form-control h3-recipe-input recipe-input" placeholder="Recipe Name" required oninvalid="this.setCustomValidity('You must enter a Name for the new Recipe.')" oninput="this.setCustomValidity('')" />
+                        <div class="float-right">
+                            <a asp-action="MyCollection">Back to My Recipes</a><br />
+                            @if (Model.IsPublic)
+                            {
+                                <p class="small"><span class="badge badge-primary">VISIBLE TO PUBLIC</span></p>
+                            }
+                            else
+                            {
+                                <p class="small"><span class="badge badge-secondary">PRIVATE RECIPE</span></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-sm-10 mx-sm-auto">
+                        <textarea name="Description" class="form-control recipe-input" placeholder="Recipe Description" required oninvalid="this.setCustomValidity('You must enter Some Description of the new Recipe.')" oninput="this.setCustomValidity('')">@Model.Description</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <h5>Steps</h5>
+                        <hr style="margin:0px;padding:0px;" />
+                        <div class="addStepTrigger" data-id="@Model.Id" data-toggle="modal" data-target="#NewStepModal">Add New Step</div>
+                        <hr style="margin:0px;padding:0px;" />
+                        @foreach (var step in @Model.Steps)
+                        {
+                            <div class="stepContainer">
+                                <span class="font-weight-bolder">@step.Name</span> @if (@step.Duration.HasValue)
+                                {<span>(@step.Duration @step.DurationUnit)</span>}<br />
+                                <div class="small sm-recipe-textarea">@step.Detail</div>
+                                <a asp-action="RemoveRecipeStep" asp-controller="Recipe" asp-route-recipeId="@Model.Id" asp-route-recipeStepId="@step.Id">
+                                    <div class="deleteStepButton" title="Click To Delete This Recipe Step.">X</div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                    <div class="col col-sm-6">
+                        <h5>Ingredients</h5>
+                        <hr style="margin:0px;padding:0px;" />
+                        <div class="addIngredientTrigger" data-id="@Model.Id" data-toggle="modal" data-target="#NewIngredientModal">Add New Ingredient</div>
+                        <hr style="margin:0px;padding:0px;" />
+                        @foreach (var ingredient in @Model.Ingredients)
+                        {
+                            <div class="ingredientContainer">
+                                <span class="font-weight-bolder small">@ingredient.Name</span> @if (@ingredient.Units.HasValue)
+                                {<span class="small">(@ingredient.Units @ingredient.UnitOfMeasure)</span>}<br />
+                                <div class="small sm-recipe-textarea">@ingredient.Description</div>
+                                <a asp-action="RemoveRecipeIngredient" asp-controller="Recipe" asp-route-recipeId="@Model.Id" asp-route-recipeIngredientId="@ingredient.Id">
+                                    <div class="deleteIngredientButton" title="Click To Delete This Recipe Ingredient.">X</div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- todo:: make public/private controll here as button-->
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                <button class="btn btn-dark" type="submit">Save</button>
+                @if (Model.IsPublic)
+                {
+                    <a class="btn btn-outline-info" type="button" asp-action="MakeRecipePrivate" asp-controller="Recipe" asp-route-recipeId="@Model.Id">Make Private</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-success" type="button" asp-action="MakeRecipePublic" asp-controller="Recipe" asp-route-recipeId="@Model.Id">Make Public</a>
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="NewIngredientModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a new ingredient</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="AddRecipeIngredient" method="post">
+                <div class="modal-body">
+                    <input name="RecipeId" hidden value="@Model.Id" />
+                    <input name="Name" class="form-control" placeholder="Name" required oninvalid="this.setCustomValidity('You must enter a Name for the new Recipe Ingredient.')" oninput="this.setCustomValidity('')"  /><br />
+                    <textarea name="Description" class="form-control" placeholder="Description" required oninvalid="this.setCustomValidity('You must enter Some Desecription of how to prep the new Recipe Ingredient.')" oninput="this.setCustomValidity('')" ></textarea><br />
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <input name="Units" class="form-control" placeholder="#" type="number" min="0" step="0.25" />
+                        </div>
+                        <div class="col-9">
+                            <input name="UnitOfMeasure" class="form-control" placeholder="Units (ie - 'Cups')" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="NewStepModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a new step</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="AddRecipeStep">
+                <div class="modal-body">
+                    <input name="RecipeId" hidden value="@Model.Id" />
+                    <input name="Name" class="form-control" placeholder="Name" required oninvalid="this.setCustomValidity('You must enter a Name for the new Recipe Step.')" oninput="this.setCustomValidity('')" /><br />
+                    <textarea name="Detail" class="form-control" placeholder="Detail" required oninvalid="this.setCustomValidity('You must enter Some Details describing the new Recipe Step.')" oninput="this.setCustomValidity('')"></textarea><br />
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <input name="Duration" class="form-control" placeholder="Amount" type="number" min="0" step="0.25" />
+                        </div>
+                        <div class="col-8">
+                            <input name="DurationUnit" class="form-control" placeholder="Units (ie - 'Minutes')" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

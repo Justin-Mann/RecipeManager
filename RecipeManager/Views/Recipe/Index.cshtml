@@ -1,0 +1,21 @@
+﻿@model IEnumerable<RecipeManager.Models.RecipeEntity>
+
+<div class="text-center">
+    <h1 class="display-4">Shared Recipes</h1>
+    <hr />
+</div>
+<div class="container-fluid">
+    @if (Model.Count() == 0) {
+        <p>Let's Add Some Juicy Goodness.. Cick <a asp-controller="Recipe" asp-action="MyCollection">here</a> to get Started.</p>
+    }
+    @foreach (var recipe in Model)
+    {
+        <div class="row recipe-listing-row">
+            <div class="col col-12">
+                <h4>@Html.ActionLink(recipe.Name, "Detail", "Recipe", new { id = recipe.Id }, null)</h4>
+                <p class="one-liner">@recipe.Description</p>
+            </div>
+        </div>
+        <hr style="padding-top:0px; margin-top:0px;" />
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@model RecipeManager.Models.RecipeEntity
+<div class="text-center">
+    <h1 class="display-4">Recipe Editor</h1>
+    <hr />
+</div>
+<div class="container">
+    <form asp-action="CreateNew">
+        <div class="text-danger recipeValidationErrors"><!--TODO--></div>
+        <input name="IsPublic" hidden value="false" />
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <input name="Name" class="form-control h3-recipe-input recipe-input" placeholder="Recipe Name" required oninvalid="this.setCustomValidity('You must enter a Name for the new Recipe.')" oninput="this.setCustomValidity('')" />
+                        <div class="float-right">
+                            <a asp-action="Index">Back to My Recipes</a><br />
+                            <p class="small"><span class="badge badge-secondary">PRIVATE RECIPE (for now)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-sm-10 mx-sm-auto">
+                        <textarea name="Description" class="form-control recipe-input" placeholder="Recipe Description" required oninvalid="this.setCustomValidity('You must enter Some Description of the new Recipe.')" oninput="this.setCustomValidity('')"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <h5>Steps</h5>
+                        <hr style="margin:0px;padding:0px;" />
+                        <div class="alert alert-info"><b>Create your Recipe first</b> then we can add some Steps to follow.</div>
+                    </div>
+                    <hr />
+                    <div class="col col-sm-6">
+                        <h5>Ingredients</h5>
+                        <hr style="margin:0px;padding:0px;" />
+                        <div class="alert alert-info"><b>Create your Recipe first</b> then we can add some Ingredients.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- todo:: make public/private controll here as button-->
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                <button class="btn btn-dark" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

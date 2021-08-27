@@ -1,0 +1,28 @@
+﻿@model IEnumerable<RecipeManager.Models.RecipeEntity>
+
+<div class="text-center">
+    <h1 class="display-4">My Recipes</h1>
+    <hr />
+    <p><a class="addIngredientTrigger" asp-action="Create"><h4>Create New</h4></a></p>
+    <hr />
+</div>
+<div class="container-fluid">
+    @foreach (var recipe in Model)
+    {
+        <div class="row recipe-listing-row">
+            <div class="col col-10">
+                <h4>@Html.ActionLink(recipe.Name, "Edit", "Recipe", new { id = recipe.Id }, null)</h4>
+                <p class="one-liner">@recipe.Description</p>
+            </div>
+            <div class="col col-2 text-center text-capitalize">
+                @Html.ActionLink("Delete", "Delete", new { id = recipe.Id }, new { @style = "color:#ce0000;font-weight:600" })<br />
+                @if (recipe.IsPublic) {
+                    <p class="small"><span class="badge badge-primary">PUBLIC</span></p>
+                } else {
+                    <p class="small"><span class="badge badge-secondary">PRIVATE</span></p>
+                }
+            </div>
+        </div>
+        <hr style="padding-top:0px; margin-top:0px;" />
+    }
+</div>
